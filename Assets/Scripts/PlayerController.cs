@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
 
+    private AudioSource timeAudio;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,6 +30,8 @@ public class PlayerController : MonoBehaviour
         Time.fixedDeltaTime = 0.02f; // Reset physics timestep
 
         currentTimeEnergy = maxTimeEnergy;
+
+        timeAudio = GetComponent<AudioSource>();
     }
 
     void HandleTimeSlow()
@@ -50,6 +54,9 @@ public class PlayerController : MonoBehaviour
 
         // Clamp to keep energy in bounds
         currentTimeEnergy = Mathf.Clamp(currentTimeEnergy, 0f, maxTimeEnergy);
+
+        if (timeAudio != null)
+            timeAudio.pitch = Mathf.Lerp(timeAudio.pitch, Time.timeScale, Time.unscaledDeltaTime * 5f);
     }
 
     void Update()
