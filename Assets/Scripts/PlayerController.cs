@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
         // Check for jump
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 1f, groundLayer);
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -75,5 +75,12 @@ public class PlayerController : MonoBehaviour
 
         if (timeEnergySlider != null)
             timeEnergySlider.value = currentTimeEnergy;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if (groundCheck == null) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(groundCheck.position, 1f); // Same radius as used above
     }
 }
