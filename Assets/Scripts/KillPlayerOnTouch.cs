@@ -2,13 +2,11 @@ using UnityEngine;
 
 public class KillPlayerOnTouch : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D player)
     {
-        if (other.CompareTag("Player"))
+        if (player.CompareTag("Player"))
         {
-            // For now, just reset the scene
-            UnityEngine.SceneManagement.SceneManager.LoadScene(
-                UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+            player.GetComponent<PlayerRespawn>().Respawn();
         }
     }
 }

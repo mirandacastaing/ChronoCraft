@@ -75,6 +75,9 @@ public class PlayerController : MonoBehaviour
 
         if (timeEnergySlider != null)
             timeEnergySlider.value = currentTimeEnergy;
+
+        if (transform.position.y < -10)
+            GetComponent<PlayerRespawn>().Respawn();
     }
 
     void OnDrawGizmosSelected()
